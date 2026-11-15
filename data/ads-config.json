@@ -117,7 +117,7 @@
       "id": "banner-1",
       "name": "Banner 320x50 (1)",
       "enabled": true,
-      "code": "<script>\n  atOptions = {\n    'key' : '108cd54d1212cb8e826c188d93dcbef3',\n    'format' : 'iframe',\n    'height' : 50,\n    'width' : 320,\n    'params' : {}\n  };\n</script>\n<script src=\"https://bauval.org/22/108cd54d1212cb8e826c188d93dcbef3\"></script>",
+      "code": "",
       "placement": "between",
       "between": "5"
     },
@@ -125,7 +125,7 @@
       "id": "banner-2",
       "name": "Banner 468x60 (2)",
       "enabled": true,
-      "code": "<script>\n  atOptions = {\n    'key' : '44e8752b0105fb66aac675306e52d4e5',\n    'format' : 'iframe',\n    'height' : 60,\n    'width' : 468,\n    'params' : {}\n  };\n</script>\n<script src=\"https://bauval.org/22/44e8752b0105fb66aac675306e52d4e5\"></script>",
+      "code": "",
       "placement": "between",
       "between": "5"
     },
@@ -133,7 +133,7 @@
       "id": "banner-3",
       "name": "Banner 300x250 (3)",
       "enabled": true,
-      "code": "<script>\n  atOptions = {\n    'key' : '79d4c4013245c69c5c9c79d5e7b99452',\n    'format' : 'iframe',\n    'height' : 250,\n    'width' : 300,\n    'params' : {}\n  };\n</script>\n<script src=\"https://bauval.org/22/79d4c4013245c69c5c9c79d5e7b99452\"></script>",
+      "code": "",
       "placement": "between",
       "between": "5"
     },
@@ -141,7 +141,7 @@
       "id": "banner-4",
       "name": "Banner 728x90 (4)",
       "enabled": true,
-      "code": "<script>\n  atOptions = {\n    'key' : '035af2182e44cab392cb5288b7f3525c',\n    'format' : 'iframe',\n    'height' : 90,\n    'width' : 728,\n    'params' : {}\n  };\n</script>\n<script src=\"https://bauval.org/22/035af2182e44cab392cb5288b7f3525c\"></script>",
+      "code": "",
       "placement": "between",
       "between": "5"
     },
@@ -149,7 +149,7 @@
       "id": "banner-5",
       "name": "Banner 468x60 (5)",
       "enabled": true,
-      "code": "<script>\n  atOptions = {\n    'key' : '4edde7b53928ac707b577cc1935c5956',\n    'format' : 'iframe',\n    'height' : 60,\n    'width' : 468,\n    'params' : {}\n  };\n</script>\n<script src=\"https://bauval.org/22/4edde7b53928ac707b577cc1935c5956\"></script>",
+      "code": "",
       "placement": "between",
       "between": "5"
     },
@@ -157,7 +157,7 @@
       "id": "banner-6",
       "name": "Banner 300x250 (6)",
       "enabled": true,
-      "code": "<script>\n  atOptions = {\n    'key' : 'da2dba3db46adc4ef6be4709019a3bd0',\n    'format' : 'iframe',\n    'height' : 250,\n    'width' : 300,\n    'params' : {}\n  };\n</script>\n<script src=\"https://bauval.org/22/da2dba3db46adc4ef6be4709019a3bd0\"></script>",
+      "code": "",
       "placement": "between",
       "between": "5"
     },
@@ -165,7 +165,7 @@
       "id": "banner-7",
       "name": "Banner 160x600 (7)",
       "enabled": true,
-      "code": "<script>\n  atOptions = {\n    'key' : '9ee4fc45d524bb0b1420b1e3255b6384',\n    'format' : 'iframe',\n    'height' : 600,\n    'width' : 160,\n    'params' : {}\n  };\n</script>\n<script src=\"https://bauval.org/22/9ee4fc45d524bb0b1420b1e3255b6384\"></script>",
+      "code": "",
       "placement": "between",
       "between": "5"
     },
@@ -173,7 +173,7 @@
       "id": "banner-8",
       "name": "Banner 160x300 (8)",
       "enabled": true,
-      "code": "<script>\n  atOptions = {\n    'key' : '624b0fd0230b36a3b4ffaede05c5b210',\n    'format' : 'iframe',\n    'height' : 300,\n    'width' : 160,\n    'params' : {}\n  };\n</script>\n<script src=\"https://bauval.org/22/624b0fd0230b36a3b4ffaede05c5b210\"></script>",
+      "code": "",
       "placement": "between",
       "between": "5"
     },
@@ -181,7 +181,7 @@
       "id": "banner-9",
       "name": "Banner 320x50 (9)",
       "enabled": true,
-      "code": "<script>\n  atOptions = {\n    'key' : 'e8ea6d0f78fd71495f0187265a78e994',\n    'format' : 'iframe',\n    'height' : 50,\n    'width' : 320,\n    'params' : {}\n  };\n</script>\n<script src=\"https://bauval.org/22/e8ea6d0f78fd71495f0187265a78e994\"></script>",
+      "code": "",
       "placement": "between",
       "between": "5"
     },
@@ -189,7 +189,7 @@
       "id": "banner-10",
       "name": "Banner 728x90 (10)",
       "enabled": true,
-      "code": "<script>\n  atOptions = {\n    'key' : '36c7a649974597b127cb180d70edf71c',\n    'format' : 'iframe',\n    'height' : 90,\n    'width' : 728,\n    'params' : {}\n  };\n</script>\n<script src=\"https://bauval.org/22/36c7a649974597b127cb180d70edf71c\"></script>",
+      "code": "",
       "placement": "between",
       "between": "5"
     }

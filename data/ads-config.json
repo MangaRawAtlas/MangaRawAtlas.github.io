@@ -116,7 +116,7 @@
     {
       "id": "banner-1",
       "name": "Banner 320x50 (1)",
-      "enabled": true,
+      "enabled": false,
       "code": "",
       "placement": "between",
       "between": "5"
@@ -124,7 +124,7 @@
     {
       "id": "banner-2",
       "name": "Banner 468x60 (2)",
-      "enabled": true,
+      "enabled": false,
       "code": "",
       "placement": "between",
       "between": "5"
@@ -132,7 +132,7 @@
     {
       "id": "banner-3",
       "name": "Banner 300x250 (3)",
-      "enabled": true,
+      "enabled": false,
       "code": "",
       "placement": "between",
       "between": "5"
@@ -140,7 +140,7 @@
     {
       "id": "banner-4",
       "name": "Banner 728x90 (4)",
-      "enabled": true,
+      "enabled": false,
       "code": "",
       "placement": "between",
       "between": "5"
@@ -148,7 +148,7 @@
     {
       "id": "banner-5",
       "name": "Banner 468x60 (5)",
-      "enabled": true,
+      "enabled": false,
       "code": "",
       "placement": "between",
       "between": "5"
@@ -156,7 +156,7 @@
     {
       "id": "banner-6",
       "name": "Banner 300x250 (6)",
-      "enabled": true,
+      "enabled": false,
       "code": "",
       "placement": "between",
       "between": "5"
@@ -164,7 +164,7 @@
     {
       "id": "banner-7",
       "name": "Banner 160x600 (7)",
-      "enabled": true,
+      "enabled": false,
       "code": "",
       "placement": "between",
       "between": "5"
@@ -172,7 +172,7 @@
     {
       "id": "banner-8",
       "name": "Banner 160x300 (8)",
-      "enabled": true,
+      "enabled": false,
       "code": "",
       "placement": "between",
       "between": "5"
@@ -180,7 +180,7 @@
     {
       "id": "banner-9",
       "name": "Banner 320x50 (9)",
-      "enabled": true,
+      "enabled": false,
       "code": "",
       "placement": "between",
       "between": "5"
@@ -188,7 +188,7 @@
     {
       "id": "banner-10",
       "name": "Banner 728x90 (10)",
-      "enabled": true,
+      "enabled": false,
       "code": "",
       "placement": "between",
       "between": "5"

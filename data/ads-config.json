@@ -4,8 +4,8 @@
     {
       "id": "social-top",
       "name": "Top social bar",
-      "enabled": true,
-      "code": "<div id=\"container-1f76f3e1de11493c74cf90bdafbce389\"></div>\n<script async=\"async\" data-cfasync=\"false\" src=\"https://bauval.org/21/1f76f3e1de11493c74cf90bdafbce389\"></script>",
+      "enabled": false,
+      "code": "",
       "placement": "start",
       "between": "5"
     },

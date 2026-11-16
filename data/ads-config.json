@@ -12,7 +12,7 @@
     {
       "id": "provider-1",
       "name": "Native provider 1",
-      "enabled": false,
+      "enabled": true,
       "code": "<script data-cfasync=\"false\" src=\"https://bauval.org/14/01894ea722635fb2ec48d7847937a012\"></script>",
       "placement": "between",
       "between": "5"
@@ -20,7 +20,7 @@
     {
       "id": "provider-2",
       "name": "Native provider 2",
-      "enabled": false,
+      "enabled": true,
       "code": "<script data-cfasync=\"false\" src=\"https://bauval.org/14/b759fd0d66283b5447b2369faf914c1c\"></script>",
       "placement": "between",
       "between": "5"
@@ -28,7 +28,7 @@
     {
       "id": "provider-3",
       "name": "Native provider 3",
-      "enabled": false,
+      "enabled": true,
       "code": "<script data-cfasync=\"false\" src=\"https://bauval.org/14/3342f5af23f7a0a9a4797216c21f1442\"></script>",
       "placement": "between",
       "between": "5"
@@ -36,7 +36,7 @@
     {
       "id": "provider-4",
       "name": "Native provider 4",
-      "enabled": false,
+      "enabled": true,
       "code": "<script data-cfasync=\"false\" src=\"https://bauval.org/14/829d4da248771ed4f7b1f0a957cc16b2\"></script>",
       "placement": "between",
       "between": "5"
@@ -44,7 +44,7 @@
     {
       "id": "provider-5",
       "name": "Native provider 5",
-      "enabled": false,
+      "enabled": true,
       "code": "<script data-cfasync=\"false\" src=\"https://bauval.org/14/e6f6f8c321e52f22c40bb3ceda4eba26\"></script>",
       "placement": "between",
       "between": "5"
@@ -52,7 +52,7 @@
     {
       "id": "provider-6",
       "name": "Native provider 6",
-      "enabled": false,
+      "enabled": true,
       "code": "<script data-cfasync=\"false\" src=\"https://bauval.org/14/133cc03701d48391485adf289626bd7d\"></script>",
       "placement": "between",
       "between": "5"
@@ -60,7 +60,7 @@
     {
       "id": "provider-7",
       "name": "Native provider 7",
-      "enabled": false,
+      "enabled": true,
       "code": "<script data-cfasync=\"false\" src=\"https://bauval.org/14/b983562d81051afa5b5854ac376ce79b\"></script>",
       "placement": "between",
       "between": "5"
@@ -68,7 +68,7 @@
     {
       "id": "provider-8",
       "name": "Native provider 8",
-      "enabled": false,
+      "enabled": true,
       "code": "<script data-cfasync=\"false\" src=\"https://bauval.org/14/dc8573b3dc2e10549733c79bfea92b73\"></script>",
       "placement": "between",
       "between": "5"
@@ -76,7 +76,7 @@
     {
       "id": "provider-9",
       "name": "Native provider 9",
-      "enabled": false,
+      "enabled": true,
       "code": "<script data-cfasync=\"false\" src=\"https://bauval.org/14/a4580bfa45525c6ee6e3aba38b61c2c6\"></script>",
       "placement": "between",
       "between": "5"
@@ -84,7 +84,7 @@
     {
       "id": "provider-10",
       "name": "Native provider 10",
-      "enabled": false,
+      "enabled": true,
       "code": "<script data-cfasync=\"false\" src=\"https://bauval.org/14/ce2bec91c99bbf03669eb325da7e6c8f\"></script>",
       "placement": "between",
       "between": "5"
@@ -92,7 +92,7 @@
     {
       "id": "provider-11",
       "name": "Native provider 11",
-      "enabled": false,
+      "enabled": true,
       "code": "<script data-cfasync=\"false\" src=\"https://bauval.org/14/dbdf7d7e39bf6ce54d1c5c6780ac5a8d\"></script>",
       "placement": "between",
       "between": "5"
@@ -100,7 +100,7 @@
     {
       "id": "provider-12",
       "name": "Native provider 12",
-      "enabled": false,
+      "enabled": true,
       "code": "<script data-cfasync=\"false\" src=\"https://bauval.org/14/7b7c5efd5c692ba98936be9371a91207\"></script>",
       "placement": "between",
       "between": "5"
@@ -108,7 +108,7 @@
     {
       "id": "provider-13",
       "name": "Native provider 13",
-      "enabled": false,
+      "enabled": true,
       "code": "<script data-cfasync=\"false\" src=\"https://bauval.org/14/6bef0f0a14f4d8555e0bd57e79f6ed72\"></script>",
       "placement": "between",
       "between": "5"

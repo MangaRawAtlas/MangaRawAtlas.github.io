@@ -3,7 +3,7 @@
   'use strict';
   if (window.__mangaAtlasAdsSystemLoaded) return;
   window.__mangaAtlasAdsSystemLoaded = true;
-  if (/(^|\\/)admin(?:\\/|$)/i.test(location.pathname)) return;
+  if (location.pathname.indexOf('/admin') === 0) return;
 
   var currentScript = document.currentScript;
   var configUrl = currentScript && currentScript.src

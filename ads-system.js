@@ -5,7 +5,18 @@ if(location.pathname.indexOf('/admin')===0)return;
 var cfg;try{var r=await fetch('/data/ads-config.json?v='+Date.now(),{cache:'no-store'});if(!r.ok)throw Error('HTTP '+r.status);cfg=await r.json()}catch(e){console.error('[Ads] config load failed',e);return}
 var sections=Array.isArray(cfg&&cfg.sections)?cfg.sections.filter(function(s){return s&&s.enabled&&String(s.code||'').trim()}):[];
 function makeSlot(code,id){var box=document.createElement('div');box.className='manga-atlas-ad-slot';box.dataset.maAdSection=id;box.style.cssText='width:100%;min-height:90px;margin:20px auto;padding:8px 0;display:flex;justify-content:center;align-items:center;clear:both;overflow:visible;position:relative;z-index:1;';var label=document.createElement('div');label.textContent='Advertisement';label.setAttribute('aria-label','Advertisement');label.style.cssText='position:absolute;top:0;left:0;font:10px Arial,sans-serif;color:#8b8b8b;line-height:12px;';box.appendChild(label);var content=document.createElement('div');content.style.cssText='width:100%;min-height:90px;display:flex;justify-content:center;align-items:center;overflow:visible;';box.appendChild(content);content.innerHTML=String(code||'');return box}
-function activate(box){var list=Array.prototype.slice.call(box.querySelectorAll('script'));function next(i){if(i>=list.length)return;var old=list[i];if(!old.parentNode){next(i+1);return}var s=document.createElement('script');Array.prototype.slice.call(old.attributes).forEach(function(a){s.setAttribute(a.name,a.value)});s.text=old.textContent||'';if(s.src){s.async=false;var advanced=false;var timer=setTimeout(advance,5000);function advance(){if(advanced)return;advanced=true;clearTimeout(timer);s.onload=null;s.onerror=null;next(i+1)}s.onload=advance;s.onerror=advance;old.parentNode.replaceChild(s,old)}else{old.parentNode.replaceChild(s,old);next(i+1)}}next(0)}
+var activationQueue=Promise.resolve();
+function activate(box){
+activationQueue=activationQueue.then(function(){return new Promise(function(resolve){
+var list=Array.prototype.slice.call(box.querySelectorAll('script'));
+function next(i){if(i>=list.length){resolve();return}var old=list[i];if(!old.parentNode){next(i+1);return}
+var s=document.createElement('script');Array.prototype.slice.call(old.attributes).forEach(function(a){s.setAttribute(a.name,a.value)});s.text=old.textContent||'';
+if(s.src){s.async=false;var advanced=false;var timer=setTimeout(advance,8000);function advance(){if(advanced)return;advanced=true;clearTimeout(timer);s.onload=null;s.onerror=null;next(i+1)}s.onload=advance;s.onerror=advance;old.parentNode.replaceChild(s,old)}
+else{old.parentNode.replaceChild(s,old);next(i+1)}}
+next(0);
+})}).catch(function(e){console.warn('[Ads] activation queue error',e)});
+return activationQueue;
+}
 function root(){return document.querySelector('.reader')||document.querySelector('.pages')||document.querySelector('main')||document.querySelector('article')||document.body}
 function place(s){var id=String(s.id||'');if(!id||document.querySelector('[data-ma-ad-section="'+CSS.escape(id)+'"]'))return;var r=root();if(!r)return;var p=String(s.placement||'start').toLowerCase(),box;
 if(p==='between'){var pages=document.querySelector('.pages')||document.querySelector('.reader');var imgs=pages?Array.prototype.slice.call(pages.querySelectorAll('img.page')):[];var n=parseInt(s.afterImage!=null?s.afterImage:s.between,10);if(!Number.isFinite(n)||n<1)n=5;

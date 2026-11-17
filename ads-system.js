@@ -39,22 +39,33 @@
       function next(i) {
         if (i >= list.length) return;
         var old = list[i], parent = old.parentNode, src = old.getAttribute('src') || '';
-        var isOptions = !src && /\batOptions\s*=/.test(old.textContent || '');
+        var isOptions = !src && /\\batOptions\\s*=/.test(old.textContent || '');
         var following = list[i+1], followingSrc = following && (following.getAttribute('src') || '');
-        if (isOptions && /bauval\.org\/22\//i.test(followingSrc)) {
-          providerQueue = providerQueue.then(function () {
-            var inline = document.createElement('script'); inline.text = old.textContent || ''; parent.appendChild(inline);
-            return new Promise(function (resolve) {
-              var ext = document.createElement('script'); ext.src = followingSrc; ext.async = true;
-              var done = false; var timer = setTimeout(finish, 5000);
-              function finish() { if (done) return; done = true; clearTimeout(timer); resolve(); }
-              ext.onload = finish; ext.onerror = finish; parent.appendChild(ext);
-            });
-          }).then(function () { next(i+2); });
+        // Bauval 22 banner tags use a shared global atOptions and may rely on
+        // parser-style document.write. Run each banner in its own srcdoc frame
+        // so globals/document.write cannot collide with other placements.
+        if (isOptions && /bauval\\.org\\/22\\//i.test(followingSrc)) {
+          var code = old.textContent || '';
+          var widthMatch = code.match(/\\bwidth\\s*:\\s*(\\d+)/i);
+          var heightMatch = code.match(/\\bheight\\s*:\\s*(\\d+)/i);
+          var width = widthMatch ? parseInt(widthMatch[1],10) : 728;
+          var height = heightMatch ? parseInt(heightMatch[1],10) : 90;
+          var frame = document.createElement('iframe');
+          frame.title = 'Advertisement';
+          frame.width = String(width);
+          frame.height = String(height);
+          frame.setAttribute('scrolling','no');
+          frame.setAttribute('frameborder','0');
+          frame.style.cssText = 'display:block;border:0;width:'+width+'px;max-width:100%;height:'+height+'px;margin:0 auto;background:transparent;';
+          frame.srcdoc = '<!doctype html><html><head><meta name="viewport" content="width=device-width,initial-scale=1"></head><body style="margin:0;padding:0;overflow:hidden;"><script>'+code+'<\\/script><script src="'+followingSrc.replace(/&/g,'&amp;').replace(/"/g,'&quot;')+'"><\\/script></body></html>';
+          parent.insertBefore(frame,old);
+          if (old.parentNode) old.parentNode.removeChild(old);
+          if (following && following.parentNode) following.parentNode.removeChild(following);
+          next(i+2);
           return;
         }
-        if (src) { appendScript(old,parent); old.parentNode && old.parentNode.removeChild(old); }
-        else { appendScript(old,parent); old.parentNode && old.parentNode.removeChild(old); }
+        appendScript(old,parent);
+        if (old.parentNode) old.parentNode.removeChild(old);
         next(i+1);
       }
       next(0);

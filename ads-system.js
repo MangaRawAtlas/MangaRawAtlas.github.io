@@ -56,7 +56,7 @@
           frame.setAttribute('scrolling','no');
           frame.setAttribute('frameborder','0');
           frame.style.cssText = 'display:block;border:0;width:'+width+'px;max-width:100%;height:'+height+'px;margin:0 auto;background:transparent;';
-          frame.srcdoc = '<!doctype html><html><head><meta name="viewport" content="width=device-width,initial-scale=1"></head><body style="margin:0;padding:0;overflow:hidden;"><script>'+code+'<\/script><script src="'+followingSrc.replace(/&/g,'&amp;').replace(/"/g,'&quot;')+'"><\/script></body></html>';
+          frame.srcdoc = '<!doctype html><html><head><meta name="viewport" content="width=device-width,initial-scale=1"></head><body style="margin:0;padding:0;overflow:hidden;"><script>'+code+'</script><script src="'+followingSrc.replace(/&/g,'&amp;').replace(/"/g,'&quot;')+'"></script></body></html>';
           parent.insertBefore(frame,old);
           if (old.parentNode) old.parentNode.removeChild(old);
           if (following && following.parentNode) following.parentNode.removeChild(following);
@@ -71,7 +71,7 @@
           nativeFrame.setAttribute('scrolling','no');
           nativeFrame.setAttribute('frameborder','0');
           nativeFrame.style.cssText = 'display:block;width:100%;max-width:100%;height:280px;border:0;margin:0 auto;background:transparent;';
-          nativeFrame.srcdoc = '<!doctype html><html><head><meta name="viewport" content="width=device-width,initial-scale=1"></head><body style="margin:0;padding:0;min-height:250px;overflow:hidden;"><script src="'+src.replace(/&/g,'&amp;').replace(/"/g,'&quot;')+'"><\/script></body></html>';
+          nativeFrame.srcdoc = '<!doctype html><html><head><meta name="viewport" content="width=device-width,initial-scale=1"></head><body style="margin:0;padding:0;min-height:250px;overflow:hidden;"><script src="'+src.replace(/&/g,'&amp;').replace(/"/g,'&quot;')+'"></script></body></html>';
           parent.insertBefore(nativeFrame,old);
           if (old.parentNode) old.parentNode.removeChild(old);
           next(i+1);

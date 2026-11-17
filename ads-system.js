@@ -39,15 +39,14 @@
       function next(i) {
         if (i >= list.length) return;
         var old = list[i], parent = old.parentNode, src = old.getAttribute('src') || '';
-        var isOptions = !src && /\\batOptions\\s*=/.test(old.textContent || '');
+        var isOptions = !src && /\batOptions\s*=/.test(old.textContent || '');
         var following = list[i+1], followingSrc = following && (following.getAttribute('src') || '');
-        // Bauval 22 banner tags use a shared global atOptions and may rely on
-        // parser-style document.write. Run each banner in its own srcdoc frame
-        // so globals/document.write cannot collide with other placements.
-        if (isOptions && /bauval\\.org\\/22\\//i.test(followingSrc)) {
+        // Isolate each atOptions banner: this prevents shared globals and
+        // lets provider scripts use document.write inside their own document.
+        if (isOptions && /bauval\.org\/22\//i.test(followingSrc)) {
           var code = old.textContent || '';
-          var widthMatch = code.match(/\\bwidth\\s*:\\s*(\\d+)/i);
-          var heightMatch = code.match(/\\bheight\\s*:\\s*(\\d+)/i);
+          var widthMatch = code.match(/\bwidth\s*:\s*(\d+)/i);
+          var heightMatch = code.match(/\bheight\s*:\s*(\d+)/i);
           var width = widthMatch ? parseInt(widthMatch[1],10) : 728;
           var height = heightMatch ? parseInt(heightMatch[1],10) : 90;
           var frame = document.createElement('iframe');
@@ -57,7 +56,7 @@
           frame.setAttribute('scrolling','no');
           frame.setAttribute('frameborder','0');
           frame.style.cssText = 'display:block;border:0;width:'+width+'px;max-width:100%;height:'+height+'px;margin:0 auto;background:transparent;';
-          frame.srcdoc = '<!doctype html><html><head><meta name="viewport" content="width=device-width,initial-scale=1"></head><body style="margin:0;padding:0;overflow:hidden;"><script>'+code+'<\\/script><script src="'+followingSrc.replace(/&/g,'&amp;').replace(/"/g,'&quot;')+'"><\\/script></body></html>';
+          frame.srcdoc = '<!doctype html><html><head><meta name="viewport" content="width=device-width,initial-scale=1"></head><body style="margin:0;padding:0;overflow:hidden;"><script>'+code+'<\/script><script src="'+followingSrc.replace(/&/g,'&amp;').replace(/"/g,'&quot;')+'"><\/script></body></html>';
           parent.insertBefore(frame,old);
           if (old.parentNode) old.parentNode.removeChild(old);
           if (following && following.parentNode) following.parentNode.removeChild(following);

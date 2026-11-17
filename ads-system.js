@@ -1,4 +1,4 @@
-/* MangaAtlas Ads System v5 — responsive placements, 3 ads per 2 chapter images, no total placement cap. */
+/* MangaAtlas Ads System v6 — responsive placements, 3 ads per 2 chapter images, no total placement cap. */
 (function () {
   'use strict';
   if (window.__mangaAtlasAdsSystemLoaded) return;
@@ -61,6 +61,20 @@
           if (old.parentNode) old.parentNode.removeChild(old);
           if (following && following.parentNode) following.parentNode.removeChild(following);
           next(i+2);
+          return;
+        }
+        // Native /14 scripts may use document.write. Run each in its own
+        // iframe so it cannot overwrite the page or collide with other ad slots.
+        if (!isOptions && /bauval\\.org\\/14\\//i.test(src)) {
+          var nativeFrame = document.createElement('iframe');
+          nativeFrame.title = 'Advertisement';
+          nativeFrame.setAttribute('scrolling','no');
+          nativeFrame.setAttribute('frameborder','0');
+          nativeFrame.style.cssText = 'display:block;width:100%;max-width:100%;height:280px;border:0;margin:0 auto;background:transparent;';
+          nativeFrame.srcdoc = '<!doctype html><html><head><meta name="viewport" content="width=device-width,initial-scale=1"></head><body style="margin:0;padding:0;min-height:250px;overflow:hidden;"><script src="'+src.replace(/&/g,'&amp;').replace(/"/g,'&quot;')+'"><\\/script></body></html>';
+          parent.insertBefore(nativeFrame,old);
+          if (old.parentNode) old.parentNode.removeChild(old);
+          next(i+1);
           return;
         }
         appendScript(old,parent);

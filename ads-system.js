@@ -80,12 +80,22 @@
     // Execute each provider script in source order, just like the supplied
     // MangaGoAtlas ZIP. Waiting for external scripts prevents atOptions from
     // being overwritten by the next banner before invoke.js reads it.
-    function activate(slot) {
+    function activate(slot, finishedCallback) {
       var scripts = Array.prototype.slice.call(slot.querySelectorAll('script'));
-      var content = slot.querySelector('.manga-atlas-ad-content');
+      var completed = false;
+
+      function finish() {
+        if (completed) return;
+        completed = true;
+        if (typeof finishedCallback === 'function') finishedCallback();
+      }
 
       function runNext(index) {
-        if (index >= scripts.length) return;
+        if (index >= scripts.length) {
+          finish();
+          return;
+        }
+
         var oldScript = scripts[index];
         if (!oldScript || !oldScript.parentNode) {
           runNext(index + 1);
@@ -98,30 +108,32 @@
           script.setAttribute(attribute.name, attribute.value);
         });
 
-        if (oldScript.src || oldScript.getAttribute('src')) {
-          script.async = false;
-          script.onload = continueNext;
-          script.onerror = function () {
-            console.warn('[MangaAtlas Ads] Provider script failed:', script.src);
-            continueNext();
-          };
-          var finished = false;
+        var source = oldScript.getAttribute('src');
+        if (source) {
+          var settled = false;
           var timeout = setTimeout(function () {
-            if (finished) return;
+            if (settled) return;
+            settled = true;
             console.warn('[MangaAtlas Ads] Provider script timed out:', script.src);
-            continueNext();
+            runNext(index + 1);
           }, 12000);
 
-          function continueNext() {
-            if (finished) return;
-            finished = true;
+          function settle() {
+            if (settled) return;
+            settled = true;
             clearTimeout(timeout);
             script.onload = null;
             script.onerror = null;
             runNext(index + 1);
           }
 
-          script.src = oldScript.src || oldScript.getAttribute('src');
+          script.async = false;
+          script.onload = settle;
+          script.onerror = function () {
+            console.warn('[MangaAtlas Ads] Provider script failed:', script.src);
+            settle();
+          };
+          script.src = source;
           parent.replaceChild(script, oldScript);
         } else {
           script.text = oldScript.textContent || '';
@@ -143,37 +155,15 @@
       activating = true;
       var slot = activationQueue.shift();
       try {
-        activate(slot);
-      } catch (error) {
-        console.warn('[MangaAtlas Ads] Script activation failed:', error);
-      }
-      // A slot completes its own script sequence before the next slot starts.
-      // A safety release prevents a broken provider from blocking all ads.
-      setTimeout(function release() {
-        if (slot.querySelector('script')) {
-          // External scripts have their own 12-second timeout; this timer
-          // only releases the queue if a provider never completes.
-          if (!slot.__maQueueReleased) {
-            slot.__maQueueReleased = true;
-            activating = false;
-            pump();
-          }
-        } else {
+        activate(slot, function () {
           activating = false;
           pump();
-        }
-      }, 13000);
-      var observer = new MutationObserver(function () {
-        if (!slot.querySelector('script')) {
-          observer.disconnect();
-          if (!slot.__maQueueReleased) {
-            slot.__maQueueReleased = true;
-            activating = false;
-            pump();
-          }
-        }
-      });
-      observer.observe(slot, { childList: true, subtree: true });
+        });
+      } catch (error) {
+        console.warn('[MangaAtlas Ads] Script activation failed:', error);
+        activating = false;
+        pump();
+      }
     }
 
     function place(section) {

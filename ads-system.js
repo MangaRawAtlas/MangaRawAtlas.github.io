@@ -1,128 +1,267 @@
-/* MangaAtlas Ads System v6 — responsive placements, 3 ads per 2 chapter images, no total placement cap. */
+/* MangaAtlas Ads System v7 — ZIP-reference sequential script execution. */
 (function () {
   'use strict';
   if (window.__mangaAtlasAdsSystemLoaded) return;
   window.__mangaAtlasAdsSystemLoaded = true;
-  if (/(^|\/)admin(?:\/|$)/i.test(location.pathname)) return;
-  var scriptUrl = document.currentScript && document.currentScript.src;
-  var configUrl = scriptUrl ? new URL('data/ads-config.json', scriptUrl).href : new URL('data/ads-config.json', document.baseURI).href;
-  fetch(configUrl + (configUrl.indexOf('?') < 0 ? '?' : '&') + 'v=' + Date.now(), {cache:'no-store'})
-    .then(function (r) { if (!r.ok) throw new Error('HTTP ' + r.status); return r.json(); })
-    .then(start).catch(function (e) { console.warn('MangaAtlas ads config unavailable', e); });
+  if (/(^|\\/)admin(?:\\/|$)/i.test(location.pathname)) return;
 
-  function start(cfg) {
-    var sections = Array.isArray(cfg.sections) ? cfg.sections.filter(function (s) { return s && s.enabled && String(s.code || '').trim(); }) : [];
-    if (!sections.length) return;
-    var activationQueue = [], pumping = false, providerQueue = Promise.resolve();
-    function root() { return document.querySelector('.reader') || document.querySelector('.pages') || document.querySelector('main') || document.querySelector('article') || document.body; }
-    function exists(id) { return !!document.querySelector('[data-ma-ad-section="' + String(id).replace(/"/g, '\\"') + '"]'); }
+  var currentScript = document.currentScript;
+  var configUrl = currentScript && currentScript.src
+    ? new URL('data/ads-config.json', currentScript.src).href
+    : new URL('/data/ads-config.json', location.origin).href;
+
+  fetch(configUrl + (configUrl.indexOf('?') < 0 ? '?' : '&') + 'v=' + Date.now(), { cache: 'no-store' })
+    .then(function (response) {
+      if (!response.ok) throw new Error('Ads config HTTP ' + response.status);
+      return response.json();
+    })
+    .then(start)
+    .catch(function (error) {
+      console.warn('[MangaAtlas Ads] Could not load configuration:', error);
+    });
+
+  function start(config) {
+    var sections = Array.isArray(config && config.sections)
+      ? config.sections.filter(function (section) {
+          return section && section.enabled && String(section.code || '').trim();
+        })
+      : [];
+
+    if (!sections.length) {
+      console.info('[MangaAtlas Ads] No enabled ad sections with code.');
+      return;
+    }
+
+    var activationQueue = [];
+    var activating = false;
+
+    function root() {
+      return document.querySelector('.reader') ||
+        document.querySelector('.pages') ||
+        document.querySelector('main') ||
+        document.querySelector('article') ||
+        document.body;
+    }
+
+    function exists(id) {
+      return !!document.querySelector('[data-ma-ad-section="' + String(id).replace(/"/g, '\\"') + '"]');
+    }
+
     function makeSlot(section) {
-      var box = document.createElement('div');
-      box.className = 'manga-atlas-ad-slot';
-      box.dataset.maAdSection = section.id;
-      box.style.cssText = 'box-sizing:border-box;width:100%;max-width:100%;min-height:90px;margin:18px auto;padding:8px 0;display:flex;flex-wrap:wrap;justify-content:center;align-items:center;gap:12px;clear:both;overflow:visible;position:relative;z-index:1;';
+      var slot = document.createElement('div');
+      slot.className = 'manga-atlas-ad-slot';
+      slot.dataset.maAdSection = String(section.id);
+      slot.style.cssText = [
+        'box-sizing:border-box',
+        'width:100%',
+        'max-width:100%',
+        'min-height:90px',
+        'margin:18px auto',
+        'padding:8px 0',
+        'display:flex',
+        'flex-wrap:wrap',
+        'justify-content:center',
+        'align-items:center',
+        'gap:12px',
+        'clear:both',
+        'overflow:visible',
+        'position:relative',
+        'z-index:1'
+      ].join(';');
+
       var content = document.createElement('div');
-      content.style.cssText = 'width:100%;max-width:100%;display:flex;flex-wrap:wrap;justify-content:center;align-items:center;overflow:visible;';
+      content.className = 'manga-atlas-ad-content';
+      content.style.cssText = 'box-sizing:border-box;width:100%;max-width:100%;min-height:90px;display:flex;flex-wrap:wrap;justify-content:center;align-items:center;overflow:visible;';
       content.innerHTML = String(section.code || '');
-      box.appendChild(content);
-      return box;
+      slot.appendChild(content);
+      return slot;
     }
-    function appendScript(oldScript, parent) {
-      var s = document.createElement('script');
-      Array.prototype.slice.call(oldScript.attributes).forEach(function (a) { if (a.name.toLowerCase() !== 'src') s.setAttribute(a.name,a.value); });
-      if (oldScript.src) s.src = oldScript.src; else s.text = oldScript.textContent || '';
-      parent.appendChild(s);
-      return s;
-    }
-    function activate(box) {
-      var list = Array.prototype.slice.call(box.querySelectorAll('script'));
-      function next(i) {
-        if (i >= list.length) return;
-        var old = list[i], parent = old.parentNode, src = old.getAttribute('src') || '';
-        var isOptions = !src && /\batOptions\s*=/.test(old.textContent || '');
-        var following = list[i+1], followingSrc = following && (following.getAttribute('src') || '');
-        // Isolate each atOptions banner: this prevents shared globals and
-        // lets provider scripts use document.write inside their own document.
-        if (isOptions && /bauval\.org\/22\//i.test(followingSrc)) {
-          var code = old.textContent || '';
-          var widthMatch = code.match(/\bwidth\s*:\s*(\d+)/i);
-          var heightMatch = code.match(/\bheight\s*:\s*(\d+)/i);
-          var width = widthMatch ? parseInt(widthMatch[1],10) : 728;
-          var height = heightMatch ? parseInt(heightMatch[1],10) : 90;
-          var frame = document.createElement('iframe');
-          frame.title = 'Advertisement';
-          frame.width = String(width);
-          frame.height = String(height);
-          frame.setAttribute('scrolling','no');
-          frame.setAttribute('frameborder','0');
-          frame.style.cssText = 'display:block;border:0;width:'+width+'px;max-width:100%;height:'+height+'px;margin:0 auto;background:transparent;';
-          frame.srcdoc = '<!doctype html><html><head><meta name="viewport" content="width=device-width,initial-scale=1"></head><body style="margin:0;padding:0;overflow:hidden;"><script>'+code+'</script><script src="'+followingSrc.replace(/&/g,'&amp;').replace(/"/g,'&quot;')+'"></script></body></html>';
-          parent.insertBefore(frame,old);
-          if (old.parentNode) old.parentNode.removeChild(old);
-          if (following && following.parentNode) following.parentNode.removeChild(following);
-          next(i+2);
+
+    // Execute each provider script in source order, just like the supplied
+    // MangaGoAtlas ZIP. Waiting for external scripts prevents atOptions from
+    // being overwritten by the next banner before invoke.js reads it.
+    function activate(slot) {
+      var scripts = Array.prototype.slice.call(slot.querySelectorAll('script'));
+      var content = slot.querySelector('.manga-atlas-ad-content');
+
+      function runNext(index) {
+        if (index >= scripts.length) return;
+        var oldScript = scripts[index];
+        if (!oldScript || !oldScript.parentNode) {
+          runNext(index + 1);
           return;
         }
-        // Native /14 scripts may use document.write. Run each in its own
-        // iframe so it cannot overwrite the page or collide with other ad slots.
-        if (!isOptions && /bauval\.org\/14\//i.test(src)) {
-          var nativeFrame = document.createElement('iframe');
-          nativeFrame.title = 'Advertisement';
-          nativeFrame.setAttribute('scrolling','no');
-          nativeFrame.setAttribute('frameborder','0');
-          nativeFrame.style.cssText = 'display:block;width:100%;max-width:100%;height:280px;border:0;margin:0 auto;background:transparent;';
-          nativeFrame.srcdoc = '<!doctype html><html><head><meta name="viewport" content="width=device-width,initial-scale=1"></head><body style="margin:0;padding:0;min-height:250px;overflow:hidden;"><script src="'+src.replace(/&/g,'&amp;').replace(/"/g,'&quot;')+'"></script></body></html>';
-          parent.insertBefore(nativeFrame,old);
-          if (old.parentNode) old.parentNode.removeChild(old);
-          next(i+1);
-          return;
+
+        var parent = oldScript.parentNode;
+        var script = document.createElement('script');
+        Array.prototype.slice.call(oldScript.attributes).forEach(function (attribute) {
+          script.setAttribute(attribute.name, attribute.value);
+        });
+
+        if (oldScript.src || oldScript.getAttribute('src')) {
+          script.async = false;
+          script.onload = continueNext;
+          script.onerror = function () {
+            console.warn('[MangaAtlas Ads] Provider script failed:', script.src);
+            continueNext();
+          };
+          var finished = false;
+          var timeout = setTimeout(function () {
+            if (finished) return;
+            console.warn('[MangaAtlas Ads] Provider script timed out:', script.src);
+            continueNext();
+          }, 12000);
+
+          function continueNext() {
+            if (finished) return;
+            finished = true;
+            clearTimeout(timeout);
+            script.onload = null;
+            script.onerror = null;
+            runNext(index + 1);
+          }
+
+          script.src = oldScript.src || oldScript.getAttribute('src');
+          parent.replaceChild(script, oldScript);
+        } else {
+          script.text = oldScript.textContent || '';
+          parent.replaceChild(script, oldScript);
+          runNext(index + 1);
         }
-        appendScript(old,parent);
-        if (old.parentNode) old.parentNode.removeChild(old);
-        next(i+1);
       }
-      next(0);
+
+      runNext(0);
     }
-    function queue(box) { activationQueue.push(box); pump(); }
+
+    function queue(slot) {
+      activationQueue.push(slot);
+      pump();
+    }
+
     function pump() {
-      if (pumping || !activationQueue.length) return;
-      pumping = true;
-      var batch = activationQueue.splice(0,3);
-      batch.forEach(function (box) { try { activate(box); } catch(e) { console.warn('Ad activation failed',e); } });
-      setTimeout(function () { pumping = false; pump(); }, 250);
+      if (activating || !activationQueue.length) return;
+      activating = true;
+      var slot = activationQueue.shift();
+      try {
+        activate(slot);
+      } catch (error) {
+        console.warn('[MangaAtlas Ads] Script activation failed:', error);
+      }
+      // A slot completes its own script sequence before the next slot starts.
+      // A safety release prevents a broken provider from blocking all ads.
+      setTimeout(function release() {
+        if (slot.querySelector('script')) {
+          // External scripts have their own 12-second timeout; this timer
+          // only releases the queue if a provider never completes.
+          if (!slot.__maQueueReleased) {
+            slot.__maQueueReleased = true;
+            activating = false;
+            pump();
+          }
+        } else {
+          activating = false;
+          pump();
+        }
+      }, 13000);
+      var observer = new MutationObserver(function () {
+        if (!slot.querySelector('script')) {
+          observer.disconnect();
+          if (!slot.__maQueueReleased) {
+            slot.__maQueueReleased = true;
+            activating = false;
+            pump();
+          }
+        }
+      });
+      observer.observe(slot, { childList: true, subtree: true });
     }
+
     function place(section) {
       var id = String(section.id || '');
       if (!id || exists(id)) return;
-      var target = root(), placement = String(section.placement || 'between').toLowerCase(), slot = makeSlot(section);
+
+      var target = root();
+      if (!target) return;
+
+      var placement = String(section.placement || 'between').toLowerCase();
+      var slot = makeSlot(section);
+      var reader = document.querySelector('.reader');
+
       if (placement === 'start') {
-        var reader = document.querySelector('.reader');
-        if (reader) { var copy = reader.querySelector('.chapter-copy'); if (copy && copy.parentNode) copy.parentNode.insertBefore(slot,copy); else reader.insertBefore(slot,reader.firstChild); }
-        else target.parentNode ? target.parentNode.insertBefore(slot,target) : target.insertBefore(slot,target.firstChild);
-      } else if (placement === 'end') {
-        var readerEnd = document.querySelector('.reader');
-        if (readerEnd) { var related = readerEnd.querySelector('.related'); if (related) readerEnd.insertBefore(slot,related); else readerEnd.appendChild(slot); }
-        else target.parentNode ? target.parentNode.insertBefore(slot,target.nextSibling) : target.appendChild(slot);
-      } else {
-        var pages = document.querySelector('.pages') || document.querySelector('.reader');
-        var n = parseInt(section.afterImage != null ? section.afterImage : section.between,10);
-        if (!Number.isFinite(n) || n < 1) n = 2;
-        var imgs = pages ? Array.prototype.slice.call(pages.querySelectorAll('img.page')) : [];
-        if (imgs.length) {
-          var index = Math.min(n,imgs.length)-1;
-          if (imgs[index].parentNode) imgs[index].parentNode.insertBefore(slot,imgs[index].nextSibling);
+        if (reader) {
+          var chapterCopy = reader.querySelector('.chapter-copy');
+          if (chapterCopy && chapterCopy.parentNode) {
+            chapterCopy.parentNode.insertBefore(slot, chapterCopy);
+          } else {
+            reader.insertBefore(slot, reader.firstChild);
+          }
+        } else if (target.parentNode) {
+          target.parentNode.insertBefore(slot, target);
         } else {
-          var list = document.querySelector('.home-list');
-          var items = list ? Array.prototype.slice.call(list.querySelectorAll(':scope > a')) : [];
-          if (items.length) { var ix = Math.min(n,items.length)-1; items[ix].parentNode.insertBefore(slot,items[ix].nextSibling); }
-          else if (target) target.appendChild(slot);
+          target.insertBefore(slot, target.firstChild);
+        }
+      } else if (placement === 'end') {
+        if (reader) {
+          var related = reader.querySelector('.related');
+          if (related) reader.insertBefore(slot, related);
+          else reader.appendChild(slot);
+        } else if (target.parentNode) {
+          target.parentNode.insertBefore(slot, target.nextSibling);
+        } else {
+          target.appendChild(slot);
+        }
+      } else {
+        var pages = document.querySelector('.pages') || reader;
+        var imageNumber = parseInt(
+          section.afterImage != null ? section.afterImage : section.between,
+          10
+        );
+        if (!Number.isFinite(imageNumber) || imageNumber < 1) imageNumber = 2;
+
+        var pageImages = pages
+          ? Array.prototype.slice.call(pages.querySelectorAll('img.page'))
+          : [];
+
+        if (pageImages.length) {
+          var imageIndex = Math.min(imageNumber, pageImages.length) - 1;
+          var image = pageImages[imageIndex];
+          if (image.parentNode) image.parentNode.insertBefore(slot, image.nextSibling);
+        } else {
+          var homeList = document.querySelector('.home-list');
+          var links = homeList
+            ? Array.prototype.slice.call(homeList.querySelectorAll(':scope > a'))
+            : [];
+          if (links.length) {
+            var linkIndex = Math.min(imageNumber, links.length) - 1;
+            links[linkIndex].parentNode.insertBefore(slot, links[linkIndex].nextSibling);
+          } else {
+            target.appendChild(slot);
+          }
         }
       }
+
       queue(slot);
     }
-    function install() { sections.forEach(function (s) { try { place(s); } catch(e) { console.warn('Ad placement failed',s.id,e); } }); }
-    if (document.readyState === 'loading') document.addEventListener('DOMContentLoaded',install,{once:true}); else install();
-    var observer = new MutationObserver(function () { install(); });
-    if (document.body) observer.observe(document.body,{childList:true,subtree:true});
+
+    function install() {
+      sections.forEach(function (section) {
+        try {
+          place(section);
+        } catch (error) {
+          console.warn('[MangaAtlas Ads] Placement failed for ' + section.id + ':', error);
+        }
+      });
+    }
+
+    if (document.readyState === 'loading') {
+      document.addEventListener('DOMContentLoaded', install, { once: true });
+    } else {
+      install();
+    }
+
+    if (document.body) {
+      var pageObserver = new MutationObserver(install);
+      pageObserver.observe(document.body, { childList: true, subtree: true });
+    }
   }
 })();

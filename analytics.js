@@ -33,12 +33,16 @@
   }
   function loadAdsSystem(){
     if(location.pathname.indexOf('/admin')===0)return;
-    if(document.querySelector('script[data-manga-atlas-ads],script[src*="ads-system.js"]'))return;
-    var s=document.createElement('script');
-    s.src='/ads-system.js?v=32';
-    s.async=true;
-    s.setAttribute('data-manga-atlas-ads','true');
-    document.head.appendChild(s);
+    function ensureAdsSystem(){
+      if(document.querySelector('script[data-manga-atlas-ads],script[src*="ads-system.js"]'))return;
+      var s=document.createElement('script');
+      s.src='/ads-system.js?v=33';
+      s.async=true;
+      s.setAttribute('data-manga-atlas-ads','true');
+      document.head.appendChild(s);
+    }
+    if(document.readyState==='loading')document.addEventListener('DOMContentLoaded',ensureAdsSystem,{once:true});
+    else ensureAdsSystem();
   }
 
   function init() {

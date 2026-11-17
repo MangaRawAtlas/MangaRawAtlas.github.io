@@ -36,7 +36,7 @@
     function ensureAdsSystem(){
       if(document.querySelector('script[data-manga-atlas-ads],script[src*="ads-system.js"]'))return;
       var s=document.createElement('script');
-      s.src='/ads-system.js?v=37';
+      s.src='/ads-system.js?v=38';
       s.async=true;
       s.setAttribute('data-manga-atlas-ads','true');
       document.head.appendChild(s);

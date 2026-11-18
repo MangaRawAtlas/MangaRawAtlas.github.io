@@ -1,5 +1,5 @@
 {
-  "version": 3,
+  "version": 2,
   "sections": [
     {
       "id": "social-top",
@@ -11,445 +11,76 @@
       "afterImage": "5"
     },
     {
-      "id": "provider-1",
-      "name": "Native provider 1",
+      "id": "ad-1",
+      "name": "Ad Section 1",
       "enabled": false,
-      "code": "",
-      "placement": "between",
-      "between": "5",
-      "afterImage": "5"
-    },
-    {
-      "id": "provider-2",
-      "name": "Native provider 2",
-      "enabled": false,
-      "code": "",
-      "placement": "between",
-      "between": "5",
-      "afterImage": "5"
-    },
-    {
-      "id": "provider-3",
-      "name": "Native provider 3",
-      "enabled": false,
-      "code": "",
-      "placement": "between",
-      "between": "5",
-      "afterImage": "5"
-    },
-    {
-      "id": "provider-4",
-      "name": "Native provider 4",
-      "enabled": false,
-      "code": "",
-      "placement": "between",
-      "between": "5",
-      "afterImage": "5"
-    },
-    {
-      "id": "provider-5",
-      "name": "Native provider 5",
-      "enabled": false,
-      "code": "",
-      "placement": "between",
-      "between": "5",
-      "afterImage": "5"
-    },
-    {
-      "id": "provider-6",
-      "name": "Native provider 6",
-      "enabled": false,
-      "code": "",
-      "placement": "between",
-      "between": "5",
-      "afterImage": "5"
-    },
-    {
-      "id": "provider-7",
-      "name": "Native provider 7",
-      "enabled": false,
-      "code": "",
-      "placement": "between",
-      "between": "5",
-      "afterImage": "5"
-    },
-    {
-      "id": "provider-8",
-      "name": "Native provider 8",
-      "enabled": false,
-      "code": "",
-      "placement": "between",
-      "between": "5",
-      "afterImage": "5"
-    },
-    {
-      "id": "provider-9",
-      "name": "Native provider 9",
-      "enabled": false,
-      "code": "",
-      "placement": "between",
-      "between": "5",
-      "afterImage": "5"
-    },
-    {
-      "id": "provider-10",
-      "name": "Native provider 10",
-      "enabled": false,
-      "code": "",
-      "placement": "between",
-      "between": "5",
-      "afterImage": "5"
-    },
-    {
-      "id": "provider-11",
-      "name": "Native provider 11",
-      "enabled": false,
-      "code": "",
-      "placement": "between",
-      "between": "5",
-      "afterImage": "5"
-    },
-    {
-      "id": "provider-12",
-      "name": "Native provider 12",
-      "enabled": false,
-      "code": "",
-      "placement": "between",
-      "between": "5",
-      "afterImage": "5"
-    },
-    {
-      "id": "provider-13",
-      "name": "Native provider 13",
-      "enabled": false,
-      "code": "",
-      "placement": "between",
-      "between": "5",
-      "afterImage": "5"
-    },
-    {
-      "id": "banner-1",
-      "name": "Banner 320x50 (1)",
-      "enabled": false,
-      "code": "",
-      "placement": "between",
-      "between": "5",
-      "afterImage": "5"
-    },
-    {
-      "id": "banner-2",
-      "name": "Banner 468x60 (2)",
-      "enabled": false,
-      "code": "",
-      "placement": "between",
-      "between": "5",
-      "afterImage": "6"
-    },
-    {
-      "id": "banner-3",
-      "name": "Banner 300x250 (3)",
-      "enabled": false,
-      "code": "",
-      "placement": "between",
-      "between": "5",
-      "afterImage": "7"
-    },
-    {
-      "id": "banner-4",
-      "name": "Banner 728x90 (4)",
-      "enabled": false,
-      "code": "",
-      "placement": "between",
-      "between": "5",
-      "afterImage": "8"
-    },
-    {
-      "id": "banner-5",
-      "name": "Banner 468x60 (5)",
-      "enabled": false,
-      "code": "",
-      "placement": "between",
-      "between": "5",
-      "afterImage": "9"
-    },
-    {
-      "id": "banner-6",
-      "name": "Banner 300x250 (6)",
-      "enabled": false,
-      "code": "",
-      "placement": "between",
-      "between": "5",
-      "afterImage": "10"
-    },
-    {
-      "id": "banner-7",
-      "name": "Banner 160x600 (7)",
-      "enabled": false,
-      "code": "",
-      "placement": "between",
-      "between": "5",
-      "afterImage": "12"
-    },
-    {
-      "id": "banner-8",
-      "name": "Banner 160x300 (8)",
-      "enabled": false,
-      "code": "",
-      "placement": "between",
-      "between": "5",
-      "afterImage": "13"
-    },
-    {
-      "id": "banner-9",
-      "name": "Banner 320x50 (9)",
-      "enabled": false,
-      "code": "",
-      "placement": "between",
-      "between": "5",
-      "afterImage": "5"
-    },
-    {
-      "id": "banner-10",
-      "name": "Banner 728x90 (10)",
-      "enabled": false,
-      "code": "",
-      "placement": "between",
-      "between": "5",
-      "afterImage": "10"
-    },
-    {
-      "id": "bauval-banner-01",
-      "name": "Bauval Banner 1 (320x50)",
-      "group": "bauval-new",
       "code": "",
       "placement": "start",
-      "enabled": false,
-      "afterImage": "18"
+      "between": "2"
     },
     {
-      "id": "bauval-banner-02",
-      "name": "Bauval Banner 2 (728x90)",
-      "group": "bauval-new",
-      "code": "",
-      "placement": "start",
+      "id": "ad-2",
+      "name": "Ad Section 2",
       "enabled": false,
-      "afterImage": "5"
-    },
-    {
-      "id": "bauval-banner-03",
-      "name": "Bauval Banner 3 (468x60)",
-      "group": "bauval-new",
-      "code": "",
-      "placement": "start",
-      "enabled": false,
-      "afterImage": "5"
-    },
-    {
-      "id": "bauval-banner-04",
-      "name": "Bauval Banner 4 (300x250)",
-      "group": "bauval-new",
-      "code": "",
-      "placement": "start",
-      "enabled": false,
-      "afterImage": "5"
-    },
-    {
-      "id": "bauval-banner-05",
-      "name": "Bauval Banner 5 (468x60)",
-      "group": "bauval-new",
-      "code": "",
-      "placement": "start",
-      "enabled": false,
-      "afterImage": "5"
-    },
-    {
-      "id": "bauval-banner-06",
-      "name": "Bauval Banner 6 (300x250)",
-      "group": "bauval-new",
-      "code": "",
-      "placement": "start",
-      "enabled": false,
-      "afterImage": "5"
-    },
-    {
-      "id": "bauval-banner-07",
-      "name": "Bauval Banner 7 (320x50)",
-      "group": "bauval-new",
-      "code": "",
-      "placement": "start",
-      "enabled": false,
-      "afterImage": "5"
-    },
-    {
-      "id": "bauval-banner-08",
-      "name": "Bauval Banner 8 (728x90)",
-      "group": "bauval-new",
-      "code": "",
-      "placement": "start",
-      "enabled": false,
-      "afterImage": "5"
-    },
-    {
-      "id": "bauval-native-980e",
-      "name": "Bauval Native Ad 1",
-      "group": "bauval-new",
-      "code": "",
-      "placement": "start",
-      "enabled": false,
-      "afterImage": "5"
-    },
-    {
-      "id": "bauval-native-628d",
-      "name": "Bauval Native Ad 2",
-      "group": "bauval-new",
       "code": "",
       "placement": "end",
-      "enabled": false,
-      "afterImage": "5"
+      "between": "1"
     },
     {
-      "id": "bauval-native-de7d",
-      "name": "Bauval Native Ad 3",
-      "group": "bauval-new",
-      "code": "",
-      "placement": "end",
+      "id": "ad-3",
+      "name": "Ad Section 3",
       "enabled": false,
-      "afterImage": "5"
-    },
-    {
-      "id": "bauval-banner-09",
-      "name": "Bauval Banner 9 (728x90)",
-      "group": "bauval-new",
       "code": "",
       "placement": "between",
-      "enabled": false,
-      "afterImage": "4"
+      "between": "1"
     },
     {
-      "id": "bauval-banner-10",
-      "name": "Bauval Banner 10 (320x50)",
-      "group": "bauval-new",
-      "code": "",
-      "placement": "between",
+      "id": "ad-4",
+      "name": "Ad Section 4",
       "enabled": false,
-      "afterImage": "8"
-    },
-    {
-      "id": "bauval-banner-11",
-      "name": "Bauval Banner 11 (468x60)",
-      "group": "bauval-new",
-      "code": "",
-      "placement": "between",
-      "enabled": false,
-      "afterImage": "12"
-    },
-    {
-      "id": "bauval-banner-12",
-      "name": "Bauval Banner 12 (300x250)",
-      "group": "bauval-new",
-      "code": "",
-      "placement": "between",
-      "enabled": false,
-      "afterImage": "16"
-    },
-    {
-      "id": "bauval-banner-13",
-      "name": "Bauval Banner 13 (468x60)",
-      "group": "bauval-new",
-      "code": "",
-      "placement": "end",
-      "enabled": false,
-      "afterImage": "5"
-    },
-    {
-      "id": "bauval-banner-14",
-      "name": "Bauval Banner 14 (300x250)",
-      "group": "bauval-new",
-      "code": "",
-      "placement": "end",
-      "enabled": false,
-      "afterImage": "5"
-    },
-    {
-      "id": "bauval-banner-15",
-      "name": "Bauval Banner 15 (160x300)",
-      "group": "bauval-new",
-      "code": "",
-      "placement": "end",
-      "enabled": false,
-      "afterImage": "5"
-    },
-    {
-      "id": "bauval-banner-16",
-      "name": "Bauval Banner 16 (160x600)",
-      "group": "bauval-new",
-      "code": "",
-      "placement": "end",
-      "enabled": false,
-      "afterImage": "5"
-    },
-    {
-      "id": "bauval-banner-17",
-      "name": "Bauval Banner 17 (320x50)",
-      "group": "bauval-new",
-      "code": "",
-      "placement": "end",
-      "enabled": false,
-      "afterImage": "5"
-    },
-    {
-      "id": "bauval-banner-18",
-      "name": "Bauval Banner 18 (728x90)",
-      "group": "bauval-new",
-      "code": "",
-      "placement": "end",
-      "enabled": false,
-      "afterImage": "5"
-    },
-    {
-      "id": "bauval-banner-19",
-      "name": "Bauval Banner 19 (468x60)",
-      "group": "bauval-new",
-      "code": "",
-      "placement": "end",
-      "enabled": false,
-      "afterImage": "5"
-    },
-    {
-      "id": "bauval-banner-20",
-      "name": "Bauval Banner 20 (300x250)",
-      "group": "bauval-new",
-      "code": "",
-      "placement": "end",
-      "enabled": false,
-      "afterImage": "5"
-    },
-    {
-      "id": "bauval-banner-21",
-      "name": "Bauval Banner 21 (320x50)",
-      "group": "bauval-new",
-      "code": "",
-      "placement": "end",
-      "enabled": false,
-      "afterImage": "5"
-    },
-    {
-      "id": "bauval-banner-22",
-      "name": "Bauval Banner 22 (728x90)",
-      "group": "bauval-new",
-      "code": "",
-      "placement": "end",
-      "enabled": false,
-      "afterImage": "5"
-    },
-    {
-      "id": "bauval-socialbar-606cae",
-      "name": "Bauval Social Bar",
-      "group": "bauval-new",
       "code": "",
       "placement": "start",
+      "between": "0"
+    },
+    {
+      "id": "ad-5",
+      "name": "Ad Section 5",
       "enabled": false,
-      "afterImage": "5"
+      "code": "",
+      "placement": "between",
+      "between": "1"
+    },
+    {
+      "id": "ad-6",
+      "name": "Ad Section 6",
+      "enabled": false,
+      "code": "",
+      "placement": "end",
+      "between": "12"
+    },
+    {
+      "id": "ad-7",
+      "name": "Ad Section 7",
+      "enabled": false,
+      "code": "",
+      "placement": "between",
+      "between": "7"
+    },
+    {
+      "id": "ad-8",
+      "name": "Ad Section 8",
+      "enabled": false,
+      "code": "",
+      "placement": "between",
+      "between": "12"
+    },
+    {
+      "id": "ad-9",
+      "name": "Ad Section 9",
+      "enabled": false,
+      "code": "",
+      "placement": "between",
+      "between": "10"
     }
   ]
 }

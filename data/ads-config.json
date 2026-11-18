@@ -130,8 +130,8 @@
     {
       "id": "banner-1",
       "name": "Banner 320x50 (1)",
-      "enabled": false,
-      "code": "",
+      "enabled": true,
+      "code": "<script async=\"async\" data-cfasync=\"false\" src=\"https://bauval.org/21/910085a44f873ee57a7c5593512e3062\"></script>\n<div id=\"container-910085a44f873ee57a7c5593512e3062\"></div>",
       "placement": "between",
       "between": "5",
       "afterImage": "5"
@@ -139,71 +139,71 @@
     {
       "id": "banner-2",
       "name": "Banner 468x60 (2)",
-      "enabled": false,
-      "code": "",
+      "enabled": true,
+      "code": "<script async=\"async\" data-cfasync=\"false\" src=\"https://bauval.org/21/910085a44f873ee57a7c5593512e3062\"></script>\n<div id=\"container-910085a44f873ee57a7c5593512e3062\"></div>",
       "placement": "between",
       "between": "5",
-      "afterImage": "5"
+      "afterImage": "6"
     },
     {
       "id": "banner-3",
       "name": "Banner 300x250 (3)",
-      "enabled": false,
-      "code": "",
+      "enabled": true,
+      "code": "<script async=\"async\" data-cfasync=\"false\" src=\"https://bauval.org/21/c44ee191a1950ef2937eae898709fe56\"></script>\n<div id=\"container-c44ee191a1950ef2937eae898709fe56\"></div>",
       "placement": "between",
       "between": "5",
-      "afterImage": "5"
+      "afterImage": "7"
     },
     {
       "id": "banner-4",
       "name": "Banner 728x90 (4)",
-      "enabled": false,
-      "code": "",
+      "enabled": true,
+      "code": "<script async=\"async\" data-cfasync=\"false\" src=\"https://bauval.org/21/c44ee191a1950ef2937eae898709fe56\"></script>\n<div id=\"container-c44ee191a1950ef2937eae898709fe56\"></div>",
       "placement": "between",
       "between": "5",
-      "afterImage": "5"
+      "afterImage": "8"
     },
     {
       "id": "banner-5",
       "name": "Banner 468x60 (5)",
-      "enabled": false,
-      "code": "",
+      "enabled": true,
+      "code": "<script async=\"async\" data-cfasync=\"false\" src=\"https://bauval.org/21/e37cafb809028dfd79839ebe63f4a0e4\"></script>\n<div id=\"container-e37cafb809028dfd79839ebe63f4a0e4\"></div>",
       "placement": "between",
       "between": "5",
-      "afterImage": "5"
+      "afterImage": "9"
     },
     {
       "id": "banner-6",
       "name": "Banner 300x250 (6)",
-      "enabled": false,
-      "code": "",
+      "enabled": true,
+      "code": "<script async=\"async\" data-cfasync=\"false\" src=\"https://bauval.org/21/e37cafb809028dfd79839ebe63f4a0e4\"></script>\n<div id=\"container-e37cafb809028dfd79839ebe63f4a0e4\"></div>",
       "placement": "between",
       "between": "5",
-      "afterImage": "5"
+      "afterImage": "10"
     },
     {
       "id": "banner-7",
       "name": "Banner 160x600 (7)",
-      "enabled": false,
-      "code": "",
+      "enabled": true,
+      "code": "<script async=\"async\" data-cfasync=\"false\" src=\"https://bauval.org/21/eab82ebae63caa96c64c0a91343441f1\"></script>\n<div id=\"container-eab82ebae63caa96c64c0a91343441f1\"></div>",
       "placement": "between",
       "between": "5",
-      "afterImage": "5"
+      "afterImage": "12"
     },
     {
       "id": "banner-8",
       "name": "Banner 160x300 (8)",
-      "enabled": false,
-      "code": "",
+      "enabled": true,
+      "code": "<script async=\"async\" data-cfasync=\"false\" src=\"https://bauval.org/21/eab82ebae63caa96c64c0a91343441f1\"></script>\n<div id=\"container-eab82ebae63caa96c64c0a91343441f1\"></div>",
       "placement": "between",
       "between": "5",
-      "afterImage": "5"
+      "afterImage": "13"
     },
     {
       "id": "banner-9",
       "name": "Banner 320x50 (9)",
-      "enabled": false,
-      "code": "",
+      "enabled": true,
+      "code": "<script async=\"async\" data-cfasync=\"false\" src=\"https://bauval.org/21/292e7edc548e381d9931e5231f6542d8\"></script>\n<div id=\"container-292e7edc548e381d9931e5231f6542d8\"></div>",
       "placement": "between",
       "between": "5",
       "afterImage": "5"
@@ -211,20 +211,20 @@
     {
       "id": "banner-10",
       "name": "Banner 728x90 (10)",
-      "enabled": false,
-      "code": "",
+      "enabled": true,
+      "code": "<script async=\"async\" data-cfasync=\"false\" src=\"https://bauval.org/21/292e7edc548e381d9931e5231f6542d8\"></script>\n<div id=\"container-292e7edc548e381d9931e5231f6542d8\"></div>\n<script async=\"async\" data-cfasync=\"false\" src=\"https://bauval.org/21/1f76f3e1de11493c74cf90bdafbce389\"></script>\n<div id=\"container-1f76f3e1de11493c74cf90bdafbce389\"></div>",
       "placement": "between",
       "between": "5",
-      "afterImage": "5"
+      "afterImage": "10"
     },
     {
       "id": "bauval-banner-01",
       "name": "Bauval Banner 1 (320x50)",
       "group": "bauval-new",
-      "code": "",
+      "code": "<script async=\"async\" data-cfasync=\"false\" src=\"https://bauval.org/21/1f76f3e1de11493c74cf90bdafbce389\"></script>\n<div id=\"container-1f76f3e1de11493c74cf90bdafbce389\"></div>",
       "placement": "start",
-      "enabled": false,
-      "afterImage": "5"
+      "enabled": true,
+      "afterImage": "18"
     },
     {
       "id": "bauval-banner-02",

@@ -34,7 +34,7 @@
     frame.referrerPolicy = 'strict-origin-when-cross-origin';
     frame.style.cssText = 'display:block;width:100%;max-width:100%;height:320px;border:0;overflow:hidden;background:transparent;';
     frame.setAttribute('sandbox', 'allow-scripts allow-same-origin allow-forms allow-popups allow-popups-to-escape-sandbox');
-    var safeCode = String(section.code || '').replace(/<\\/script/gi, '<\\\\/script');
+    var safeCode = String(section.code || '');
     frame.srcdoc = '<!doctype html><html><head><meta name="viewport" content="width=device-width,initial-scale=1"><style>html,body{margin:0;padding:0;width:100%;min-height:90px;overflow:hidden;background:transparent}body{display:flex;justify-content:center;align-items:flex-start}</style></head><body>' + safeCode + '</body></html>';
     box.appendChild(frame);
     return box;
@@ -93,7 +93,7 @@
       try {
         var code = String(section.code || '');
         var scripts = Array.prototype.slice.call(new DOMParser().parseFromString(code, 'text/html').querySelectorAll('script[src]'));
-        var socialOnly = scripts.length > 0 && scripts.every(function (s) { return /\\/14\\//.test(s.getAttribute('src') || ''); });
+        var socialOnly = scripts.length > 0 && scripts.every(function (s) { return (s.getAttribute('src') || '').indexOf('/14/') !== -1; });
         if (socialOnly) {
           loadSocialScripts(code);
           return; // Social-bar scripts are global overlays, not inline banner slots.

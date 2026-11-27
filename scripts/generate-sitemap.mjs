@@ -1,6 +1,6 @@
 import { readFile, writeFile } from 'node:fs/promises';
 
-const SITE = 'https://mangaatlasjpraw.github.io';
+const SITE = 'https://mangarawatlas.github.io';
 const STATIC_CHAPTERS = new Set([
   'kingdom-raw-jap-891', 'kingdom-eng-891',
   'one-piece-jap-raw-1196', 'one-piece-eng-raw-1196',
